@@ -40,5 +40,5 @@ class FacebookUploader:
 
 if __name__ == "__main__":
     fb_uploader = FacebookUploader()
-    fb_uploader.login("0996085369", "mk8yjyqkd")
+    fb_uploader.login("", "")
     fb_uploader.upload_photo_or_video("../imagenes/carro.jpg")
