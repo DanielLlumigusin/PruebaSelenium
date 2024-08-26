@@ -1,3 +1,12 @@
+# "Generame un script de selenium en python en clases para este caso de prueba
+# 1, Ingreso al Youtube
+# 2. Seleccionar la caja de texto de Buscar
+# 3. Ingresar texto(""""Pruebas Selenium"""")
+# 4, Buscar un video que contenga la cadena de texto
+# 5, Dar clic y reproducir el video""
+# 6.Esperar 10 segundos
+# 7.Salir"
+
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
