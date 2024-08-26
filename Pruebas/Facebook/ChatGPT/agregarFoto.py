@@ -59,8 +59,8 @@ class FacebookPostPhotoVideoTest:
 
 if __name__ == "__main__":
     # Credenciales de Facebook y ruta de archivo
-    email = "0996085369"  # Reemplazar con tu correo registrado en Facebook
-    password = "mk8yjyqkd"       # Reemplazar con tu contraseña de Facebook
+    email = ""  # Reemplazar con tu correo registrado en Facebook
+    password = ""       # Reemplazar con tu contraseña de Facebook
     file_path = os.path.abspath("../imagenes/carro.jpg")  # Reemplazar con la ruta completa de la foto o video
 
     # Ejecutar el test de publicar foto/video
