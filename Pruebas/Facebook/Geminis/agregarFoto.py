@@ -48,8 +48,8 @@ class FacebookUploader:
         self.driver.quit()
 
 # Reemplaza con tu email, contraseña y la ruta del archivo
-email = "0996085369"
-password = "mk8yjyqkd"
+email = ""
+password = ""
 file_path = "../imagenes/carro.jpg"  # O la ruta de tu video
 
 # Crea una instancia de la clase y ejecuta las acciones
