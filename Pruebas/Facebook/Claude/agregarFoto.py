@@ -40,7 +40,7 @@ def main():
     fb_post = FacebookPostPhoto(driver)
 
     try:
-        fb_post.login_to_facebook("0996085369", "mk8yjyqkd")
+        fb_post.login_to_facebook("", "")
         fb_post.click_photo_video_button()
         
         # Asegúrate de reemplazar 'ruta/a/tu/foto.jpg' con la ruta real de tu foto
