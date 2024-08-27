@@ -1,90 +1,72 @@
-# "Generame un script de selenium en python en clases para este caso de prueba
-# ""1. Ingresar a YouTube
-# 2. Seleccionar el botón """"Acceder""""
-# 3. Escribir un correo registrado.
-# 4. Dar clic en siguiente.
-# 5. Ingresar contraseña
-# 6. De nuevo dar clic en siguiente.
-# 7. Seleccionar en la opcion """"ahora no"""" en el cuadro 
-# """"Accediste a tu cuenta""""
-# 8. Dar clic en """"Perfil"""""""
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
-class YouTubeLoginAutomation:
-    def __init__(self, driver_path, email, password):
-        self.driver_path = driver_path
+class YouTubeLogin:
+    def __init__(self, email, password):
+        self.driver = webdriver.Chrome()  # Puedes cambiar Chrome por Firefox, Edge, etc.
         self.email = email
         self.password = password
-        self.driver = None
 
-    def setup_driver(self):
-        chrome_options = Options()
-        chrome_options.add_argument("--start-maximized")
-        service = Service(self.driver_path)
-        self.driver = webdriver.Chrome(service=service, options=chrome_options)
+    def login(self):
+        self.driver.get("https://www.youtube.com/")
 
-    def login_to_youtube(self):
-        # Step 1: Ingresar a YouTube
-        self.driver.get("https://www.youtube.com")
-        time.sleep(2)
+        # Encuentra el botón "Acceder" y hace clic
+        login_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "button"))
+        )
+        login_button.click()
 
-        # Step 2: Seleccionar el botón "Acceder"
-        sign_in_button = self.driver.find_element(By.XPATH, '//yt-formatted-string[text()="Acceder"]')
-        sign_in_button.click()
-        time.sleep(2)
+        # Encuentra el campo de correo electrónico y escribe
+        email_field = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "identifierId"))
+        )
+        email_field.send_keys(self.email)
 
-        # Step 3: Escribir un correo registrado
-        email_input = self.driver.find_element(By.XPATH, '//input[@type="email"]')
-        email_input.send_keys(self.email)
-        time.sleep(1)
-
-        # Step 4: Dar clic en siguiente
-        next_button = self.driver.find_element(By.XPATH, '//span[text()="Siguiente"]')
+        # Encuentra el botón "Siguiente" y hace clic
+        next_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "identifierNext"))
+        )
         next_button.click()
-        time.sleep(2)
 
-        # Step 5: Ingresar contraseña
-        password_input = self.driver.find_element(By.XPATH, '//input[@type="password"]')
-        password_input.send_keys(self.password)
-        time.sleep(1)
+        # Encuentra el campo de contraseña y escribe
+        password_field = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.NAME, "password"))
+        )
+        password_field.send_keys(self.password)
 
-        # Step 6: De nuevo dar clic en siguiente
-        next_button = self.driver.find_element(By.XPATH, '//span[text()="Siguiente"]')
+        # Encuentra el botón "Siguiente" y hace clic
+        next_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "passwordNext"))
+        )
         next_button.click()
-        time.sleep(5)
 
-        # Step 7: Seleccionar en la opción "ahora no" en el cuadro "Accediste a tu cuenta"
+        # Maneja la opción "Ahora no" (puede variar según la interfaz)
+        # Aquí asumimos un botón con el texto "Ahora no"
         try:
-            now_not_button = self.driver.find_element(By.XPATH, '//button[text()="Ahora no"]')
-            now_not_button.click()
-            time.sleep(2)
+            no_thanks_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Ahora no')]"))
+            )
+            no_thanks_button.click()
         except:
-            pass  # Si el botón no aparece, continuar sin errores
+            print("Opción 'Ahora no' no encontrada")
 
-        # Step 8: Dar clic en "Perfil"
-        profile_button = self.driver.find_element(By.XPATH, '//button[@id="avatar-btn"]')
+        # Encuentra el botón de perfil y hace clic
+        profile_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "avatar-btn"))
+        )
         profile_button.click()
-        time.sleep(2)
 
-    def close_driver(self):
-        if self.driver:
-            self.driver.quit()
+    def close_browser(self):
+        self.driver.quit()
 
-if __name__ == "__main__":
-    # Configura el path de tu WebDriver (por ejemplo, 'chromedriver.exe')
-    DRIVER_PATH = 'path/to/chromedriver'
-    
-    # Credenciales de usuario
-    EMAIL = 'tu_correo@gmail.com'
-    PASSWORD = 'tu_contraseña'
+# Reemplaza con tu correo electrónico y contraseña
+email = "danielalejandroarmasrobles@gmail.com"
+password = "Blackheart"
 
-    # Crear instancia y ejecutar el caso de prueba
-    yt_test = YouTubeLoginAutomation(DRIVER_PATH, EMAIL, PASSWORD)
-    yt_test.setup_driver()
-    yt_test.login_to_youtube()
-    yt_test.close_driver()
+# Crea una instancia de la clase y ejecuta el login
+bot = YouTubeLogin(email, password)
+bot.login()
+bot.close_browser()
