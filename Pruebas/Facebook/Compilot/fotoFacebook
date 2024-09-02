@@ -1,0 +1,50 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+# Configura la ubicación del ChromeDriver
+driver_path = 'ruta/al/chromedriver'
+driver = webdriver.Chrome(driver_path)
+
+# Abre Facebook e inicia sesión
+driver.get('https://www.facebook.com/')
+time.sleep(2)
+
+# Encuentra y completa los campos de inicio de sesión
+email_input = driver.find_element(By.ID, 'email')
+password_input = driver.find_element(By.ID, 'pass')
+login_button = driver.find_element(By.NAME, 'login')
+
+email_input.send_keys('tu_correo@ejemplo.com')
+password_input.send_keys('tu_contraseña')
+login_button.click()
+
+time.sleep(5)  # Espera a que la página cargue completamente
+
+# Navega a la sección de creación de publicaciones
+create_post = driver.find_element(By.XPATH, "//div[@aria-label='Crear una publicación']")
+create_post.click()
+
+time.sleep(2)
+
+# Encuentra el botón para subir fotos/vídeos
+photo_video_button = driver.find_element(By.XPATH, "//div[@aria-label='Foto/Video']")
+photo_video_button.click()
+
+time.sleep(2)
+
+# Sube la foto
+upload_input = driver.find_element(By.XPATH, "//input[@type='file']")
+upload_input.send_keys('ruta/a/tu/foto.jpg')
+
+time.sleep(5)  # Espera a que la foto se cargue
+
+# Publica la foto
+post_button = driver.find_element(By.XPATH, "//div[@aria-label='Publicar']")
+post_button.click()
+
+time.sleep(5)  # Espera a que la publicación se complete
+
+# Cierra el navegador
+driver.quit()

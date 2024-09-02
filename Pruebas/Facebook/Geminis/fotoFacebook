@@ -1,0 +1,37 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Inicializar el webdriver (ajusta el path según tu instalación)
+driver = webdriver.Chrome(executable_path="C:\path\to\chromedriver.exe")
+
+# Navegar a Facebook
+driver.get("https://www.facebook.com/")
+
+# ... (aquí irían los pasos de login, que pueden variar según tu configuración)
+
+# Ir a la sección de crear una publicación
+# (reemplaza este selector por uno más específico)
+create_post_button = driver.find_element(By.XPATH, "//button[text()='Crear publicación']")
+create_post_button.click()
+
+# Seleccionar el archivo de imagen
+# (el selector del input de archivo puede variar)
+file_input = driver.find_element(By.XPATH, "//input[@type='file']")
+file_input.send_keys("C:/path/to/your/image.jpg")
+
+# Agregar un comentario (opcional)
+# ...
+
+# Publicar
+# (el selector del botón de publicar puede variar)
+publish_button = driver.find_element(By.XPATH, "//button[text()='Publicar']")
+publish_button.click()
+
+# Esperar un tiempo para asegurarnos de que la publicación se haya realizado
+time.sleep(5)
+
+# Cerrar el navegador
+driver.quit()

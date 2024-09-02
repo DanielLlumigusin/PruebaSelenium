@@ -38,8 +38,8 @@ class FacebookLoginTest:
 
 if __name__ == "__main__":
     # Credenciales de Facebook
-    email = ""  # Reemplazar con tu correo registrado en Facebook
-    password = ""       # Reemplazar con tu contraseña de Facebook
+    email = "elbandidoarmas@gmail.com"  # Reemplazar con tu correo registrado en Facebook
+    password = "kespar02"       # Reemplazar con tu contraseña de Facebook
 
     # Ejecutar el test de inicio de sesión
     facebook_test = FacebookLoginTest(email, password)
